@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Aug 12 09:30:33 2017
+
+@author: santi
+"""
+
+#freq z example
+
+from scipy import signal
+
+import matplotlib.pyplot as plt
+
+
+b = signal.firwin(51, 0.5, window=('kaiser', 8))
+w, h = signal.freqz(b)
+
+
+
+plt.stem(b)
+plt.plot(b)
+
+plt.show()
