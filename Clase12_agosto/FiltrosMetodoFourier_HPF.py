@@ -10,8 +10,8 @@ Created on Sat Aug 12 21:11:55 2017
 """
 
 
-import Plotter
-Plotter.IPythonReset()
+#import Plotter
+#Plotter.IPythonReset()
 
 import Plotter
 import numpy as np 

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 """
-Created on Sat Aug 12 21:11:56 2017
+Created on Sat Aug 12 08:40:23 2017
 
 @author: Juan Antonio Barragán Noguera
 @email : jabarragann@unal.edu.co
@@ -10,8 +9,8 @@ Created on Sat Aug 12 21:11:56 2017
 """
 
 
-import Plotter
-Plotter.IPythonReset()
+#import Plotter
+#Plotter.IPythonReset()
 
 import Plotter
 import numpy as np 
@@ -19,12 +18,12 @@ import matplotlib.pyplot as plt
 from scipy import signal 
 
 
-#Diseño de un filtro pasabandas de orden N con frecuencia de corte de FL HZ
+#Diseño de un filtro pasabajas de orden N con frecuencia de corte de FL HZ
 
 #orden del filtro 
 N=101
 #Frecuencia de corte 
-FL=500;FH=1000
+FL=500
 #Frecuencia de muestreo 
 FS=8000
 TS=1/FS
@@ -40,10 +39,10 @@ window=0.54+0.46*np.cos(2*np.pi*np.arange(-temp,temp+1)/(N-1))
 
 for i in range(1,temp+1):
     
-    hCoeff[temp+i] = ( np.sin(2*np.pi*i*FH/FS) - np.sin(2*np.pi*i*FL/FS) )/(np.pi*i)
+    hCoeff[temp+i] = np.sin(2*np.pi*i*FL/FS)/(np.pi*i)
     hCoeff[temp-i] = hCoeff[temp+i]
     
-hCoeff[temp]=2*FH/FS-2*FL/FS
+hCoeff[temp]=2*FL/FS
 
 hCoeff=hCoeff*window
 
@@ -52,7 +51,7 @@ w, h = signal.freqz(hCoeff)
 f = FS*w/(2*np.pi)
 
 #Generar senal seno para comprobar el funcionamiento del filtro
-f0=650
+f0=200
 
 n=np.arange(0,100,1)
 t=n*TS
@@ -74,3 +73,4 @@ Plotter.myPlotter(ax[2],t,x,{'color':'blue'})
 Plotter.myPlotter(ax[2],t,y,{'color':'green'})
 
 Plotter.myPlotterShow(fig)
+
