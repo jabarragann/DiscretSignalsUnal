@@ -29,10 +29,15 @@ myPlotter(ax[1],[0,1,2],[1,2,3],{'color':'green'},stem=True)
 def myPlotter(ax, data1, data2, param_dict={'color':'blue'},stem=False):
     ax.grid(b=True)
     if stem:
-        out = ax.stem(data1, data2, **param_dict)
+        markerline, stemlines, baseline = ax.stem(data1, data2, **param_dict)
+        plt.setp(stemlines, linestyle='dotted', linewidth=3)
+        plt.setp(stemlines, **param_dict)
+        plt.setp(markerline, **param_dict)
+        out=markerline
+    
     else:    
         out = ax.plot(data1, data2, **param_dict)
-    
+        
     return out
 
 def myPlotterShow(fig):
