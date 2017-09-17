@@ -25,10 +25,11 @@ sys1 = ct.tf(num, den)
 print(sys1)
 
 #generate Bode
-mag, phase, omega = ct.bode(sys1,dB=True)
+mag, phase, omega = ct.bode(sys1,dB=True,Plot=False)
 
 
 fig,axes=plt.subplots(2)
+mp.myPlotterBodeLabels(axes[0],axes[1])
 
 
 mp.myPlotterBode(axes[0],axes[1],omega,mag,phase)

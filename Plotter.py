@@ -50,8 +50,8 @@ def myPlotterBode(ax0,ax1, omega, mag,phase, param_dict={'color':'blue'}):
 
 def myPlotterBodeLabels(ax0,ax1):
     ax1.set_xlabel("Frequency (rad/sec)", fontsize=12)
-    ax0.set_ylabel("Magnitude(dB)", fontsize=12)
-    ax1.set_ylabel("Phase(deg)", fontsize=12)
+    ax0.set_ylabel("Magnitude(dB)")
+    ax1.set_ylabel("Phase(Deg)")
     
     return ax0,ax1
 
