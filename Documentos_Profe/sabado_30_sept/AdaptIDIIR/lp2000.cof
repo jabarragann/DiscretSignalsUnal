@@ -1,0 +1,16 @@
+//lp2000.cof IIR lowpass coefficients file, cutoff frequency 2 kHz
+
+#define stages 4           	//number of 2nd-order stages
+
+int a[stages][3] =     {	//numerator coefficients
+{304, 608, 304},		//a10, a11, a12 for 1st stage
+{32768, 66530, 33778},		//a20, a21, a22 for 2nd stage
+{32768, 65518, 32765},		//a30, a31, a32 for 3rd stage
+{32768, 64542, 31788}  };	//a40, a41, a42 for 4th stage
+
+int b[stages][2] =     {    	//denominator coefficients
+{0, 318},			//b11, b12 for 1st stage
+{0, 3015},			//b21, b22 for 2nd stage
+{0, 9362},			//b31, b32 for 3rd stage
+{0, 22070}             };	//b41, b42 for 4th stage
+
