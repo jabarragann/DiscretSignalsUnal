@@ -36,7 +36,7 @@ myrecording = sd.rec(int(duration * FS), samplerate=FS, channels=1)
 sd.wait()
 
 plt.plot(myrecording)
-sd.play(myrecording*5.5,FS)
+sd.play(myrecording*5,FS)
 
 
 print("Finished")
