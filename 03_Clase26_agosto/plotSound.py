@@ -36,7 +36,7 @@ def callback(indata, outdata, frames, time, status):
     outdata[:] = indata
 
 def init():
-    ax.set_xlim(1200, 1350)
+    ax.set_xlim(1200, 1400)
     ax.set_ylim([-0.2,0.2])
     return ln,
 
@@ -58,6 +58,7 @@ try:
     
     plt.show()
     stream.start()
+    
 except Exception as e:
     stream.stop()
     print("Error")

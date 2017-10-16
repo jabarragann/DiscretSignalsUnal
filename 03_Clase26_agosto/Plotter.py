@@ -62,8 +62,8 @@ def myPlotterStreamShow(fig,stream):
     plt.pause(1e-9)
     fig.canvas.manager.window.activateWindow()
     fig.canvas.manager.window.raise_()
-    fig.canvas.manager.window.move(500,300)
-    fig.set_size_inches(10, 12)
+    fig.canvas.manager.window.move(500,0)
+    fig.set_size_inches(8, 10)
 
 
 
