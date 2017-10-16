@@ -17,18 +17,19 @@ import numpy as np
 
 #Generate, plot and play a tone 
 '''
-FS=8000z
+FS=8000
 f=440*2
-n=np.arange(8000*2)
+n=np.arange(8000*4)
 x=np.sin(2*np.pi*f*n/FS)
 
 plt.plot(x[:500])
 sd.play(x,FS)
 '''
 
+
 #Recording a sound
 FS=8000
-duration = 2  # seconds
+duration = 4  # seconds
 
 myrecording = sd.rec(int(duration * FS), samplerate=FS, channels=1)
 
@@ -41,5 +42,6 @@ mp.myPlotterShow(fig)
 mp.myPlotter(axes,np.arange(len(myrecording)),myrecording)
 
 sd.play(myrecording*5,FS)
+
 
 print("Finished")
