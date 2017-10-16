@@ -104,11 +104,12 @@ try:
                    right='off', left='off', labelleft='off')
     fig.tight_layout(pad=0)
 
-    stream = sd.InputStream(
-        device=args.device, channels=max(args.channels),
-        samplerate=args.samplerate, callback=audio_callback)
+    stream = sd.InputStream(blocksize=10,channels=1,samplerate=8000, callback=audio_callback)
     ani = FuncAnimation(fig, update_plot, interval=args.interval, blit=True)
+    
     with stream:
         plt.show()
+        while True:
+            pass
 except Exception as e:
     parser.exit(type(e).__name__ + ': ' + str(e))

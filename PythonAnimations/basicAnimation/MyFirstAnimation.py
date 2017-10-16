@@ -26,10 +26,10 @@ def init():
     return ln,
 
 def update(frame):
-    
+    print(frame)
     #xdata.append(frame)
     #ydata.append(np.sin(frame))
-    ydata=np.sin(2*np.pi*xdata+0.04*frame)
+    ydata=np.sin(2*np.pi*xdata+0.02*frame)
     
     ln.set_data(xdata, ydata)
     return ln,

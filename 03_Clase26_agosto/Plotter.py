@@ -21,6 +21,13 @@ def keyStrokeQuit(event,fig):
     print('press', event.key)
     if event.key=='q':
         plt.close(fig)
+        
+def keyStrokeQuitStream (event,fig,stream):
+    print('press', event.key)
+    if event.key=='q':
+        plt.close(fig)
+        stream.close()
+    
 
 '''
 myPlotter example syntax
@@ -41,7 +48,6 @@ def myPlotter(ax, data1, data2, param_dict={'color':'blue'},stem=False):
     return out
 
 def myPlotterShow(fig):
-    #fig.canvas.mpl_connect('key_press_event', keyStrokeQuit)
     fig.canvas.mpl_connect('key_press_event', lambda event: keyStrokeQuit(event, fig) )
     plt.show()
     plt.pause(1e-9)
@@ -50,5 +56,14 @@ def myPlotterShow(fig):
     fig.canvas.manager.window.move(500,300)
     fig.set_size_inches(10, 12)
         
+def myPlotterStreamShow(fig,stream):
+    fig.canvas.mpl_connect('key_press_event', lambda event: keyStrokeQuitStream(event, fig,stream) )
+    plt.show()
+    plt.pause(1e-9)
+    fig.canvas.manager.window.activateWindow()
+    fig.canvas.manager.window.raise_()
+    fig.canvas.manager.window.move(500,300)
+    fig.set_size_inches(10, 12)
+
 
 

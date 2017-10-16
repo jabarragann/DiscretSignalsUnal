@@ -11,7 +11,8 @@ Created on Sun Aug 27 11:24:45 2017
 
 import sounddevice  as sd
 import matplotlib.pyplot as plt
-
+import Plotter as mp
+import numpy as np
 
 
 #Generate, plot and play a tone 
@@ -34,7 +35,11 @@ myrecording = sd.rec(int(duration * FS), samplerate=FS, channels=1)
 #Wait until recording is finished
 sd.wait()
 
-plt.plot(myrecording)
+
+fig,axes =plt.subplots(1)
+mp.myPlotterShow(fig)
+mp.myPlotter(axes,np.arange(len(myrecording)),myrecording)
+
 sd.play(myrecording*5,FS)
 
 print("Finished")
