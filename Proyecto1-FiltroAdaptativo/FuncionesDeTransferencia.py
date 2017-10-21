@@ -60,9 +60,13 @@ a=-parallel/r1+1/r3-1/r1-1/r4
 b=1/r3+1/r1
 c=parallel/(r2*r4)+parallel*b/r2+1/r4
 
-num2= np.array([r2*r4*c1**2,-a*r2*r4*c1,parallel])
-den2= np.array([parallel*c1*r4,c*r2*r4*c1,b*parallel])
+#implementacion Arlin
+num2= np.array([1,-741,112e6])
+den2= np.array([1,19.3e3,92.6e6])
+#num2=[r4*r3*c1**2,r3*c1,-r4+1]
+#den2=[r3*c1**2,(r3*c1+c1),1]
 sys2 = ct.tf(num2, den2)
+
 
 #generate Bode
 omega=np.linspace(0.1,4000*2*np.pi,6000,endpoint=True)
