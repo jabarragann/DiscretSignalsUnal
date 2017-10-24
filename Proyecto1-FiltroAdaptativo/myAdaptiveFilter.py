@@ -55,7 +55,7 @@ def main():
                 X[M + (m - T) - 1] = Input[m];	#X new input sample for 
 									#LMS filter
             else:
-      c           break;
+                break;
         
         D = Desired[T];					#desired signal
         Y = 0;
