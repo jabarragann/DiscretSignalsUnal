@@ -11,11 +11,12 @@ import matplotlib.pyplot as plt
 
 
 
-data=open('desiredOutput1.txt','r')
+data=open('desiredOutputTemp.txt','r')
 
 arr=[]
 for i in data:
-    arr.append(float(i))
+    if i.strip()!="":
+        arr.append(float(i.strip()))
     
     
 plt.plot(arr)

@@ -11,29 +11,39 @@ import sounddevice as sd
 import numpy as np
 import random
 
-duration = 5.5  # seconds
+
+class TempInt():
+    def __init__(self):
+        self.count=0
+        
+duration = 2  # seconds
 FS=8000
 TS=1/FS
+BLOCK_SIZE=200
+
+counter1=TempInt()
+testSignal=np.zeros((BLOCK_SIZE,1)) 
 
 filename="desiredOutputTemp.txt"
-filename="temp.txt"
+
 
 #Clean Output file
 desiredOutputFile=open(filename,'w')
 desiredOutputFile.write("")
 desiredOutputFile.close()
 
-def callback(indata, outdata, frames, time, status):
+def callback(indata, outdata, blockSize, time, status):
     if status:
         print(status)
-        
-    
-    testSignal=np.zeros((frames,1))
-    t=0    
-    for i in range(frames):
-        testSignal[i]=np.sin(2*np.pi*60*t*TS)
+
+    for i in range(blockSize):
+        #Sine Wave
+        testSignal[i]=np.sin(2*np.pi*100*counter1.count*TS)
+        #Square Wave
+        #testSignal[i]= 1 if np.sin(2*np.pi*100*counter1.count*TS)>=0 else -1 
+        #Random Wave
         #testSignal[i]=0.02*random.random()
-        t=t+1
+        counter1.count=counter1.count+1
            
     outdata[:] = testSignal
     
@@ -44,12 +54,14 @@ def callback(indata, outdata, frames, time, status):
     desiredOutputFile.close()
     
 
-with sd.Stream(samplerate=FS,channels=1,blocksize=200, callback=callback):
-    #sd.sleep(int(duration * 1000))
+with sd.Stream(samplerate=FS,channels=1,blocksize=BLOCK_SIZE, callback=callback):
+    sd.sleep(int(duration * 1000))
+    
+    '''
     print('#'*40)
     print("Press enter to finish the stream!")
     print('#'*40)
     input()
     print("Programme has finished")
-    
+    '''
 
