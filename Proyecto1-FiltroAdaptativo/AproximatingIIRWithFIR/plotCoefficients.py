@@ -16,9 +16,9 @@ import numpy as np
 FS=8000
 TS=1/FS
 nyq=FS*0.5
-numberOfTaps=31
+numberOfTaps=47
 
-hcoeff=signal.firwin(numberOfTaps,[500, 900], pass_zero=False, nyq=nyq)
+hcoeff=signal.firwin(numberOfTaps,[300, 600], pass_zero=False, nyq=nyq)
 
 hestimate=[]
 coeffFile=open('WEIGHTS.TXT','r')
@@ -39,9 +39,14 @@ mp.myPlotter(axes[0],np.arange(0,numberOfTaps),hestimate,stem=True)
 w, h = signal.freqz(hestimate,[1])
 mp.myPlotter(axes[1],w,abs(h))
 
+#Butterworth
+numButterworth, denButterworth = signal.butter(1, [300/nyq,600/nyq], btype='bandstop',output='ba')
 
-numButterworth, denButterworth = signal.butter(2, [500/nyq,900/nyq], btype='bandstop',output='ba')
-wButterworth, hButterworth = signal.freqz(numButterworth,denButterworth)
+#Project Transfer Function
+num=[0.04961,6.661e-16,-0.04961]
+den=[1,-1.274,0.9008]
+
+wButterworth, hButterworth = signal.freqz(num,den)
 mp.myPlotter(axes[1],wButterworth,abs(hButterworth),{'color':'red'})
 
 mp.myPlotterShow(fig)

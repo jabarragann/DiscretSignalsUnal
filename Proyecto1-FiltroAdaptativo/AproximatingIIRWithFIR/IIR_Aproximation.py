@@ -13,9 +13,9 @@ import random
 import scipy.signal as signal
 
 #Global variables
-mu=0.1           #convergence rate
-M=31			      #order of filter
-I=270000			    #number of samples
+mu=0.11           #convergence rate
+M=47    		      #order of filter
+I=350000			    #number of samples
 FS=8000
 TS=1/FS
 nyq=FS*0.5
@@ -30,11 +30,15 @@ Desired=np.zeros(I)
 
 #Butterworth Filter
 #num, den = signal.butter(1, [500/nyq,900/nyq], btype='band',output='ba')
-num, den = signal.butter(2, [500/nyq,900/nyq], btype='bandstop',output='ba')
+#num, den = signal.butter(1, [300/nyq,600/nyq], btype='bandstop',output='ba')
 
 #FIR filter
 #num= signal.firwin(M,[500, 700], pass_zero=False, nyq=nyq)
 #den=[1]
+
+#Project Transfer Functions
+num=[0.04961,6.661e-16,-0.04961]
+den=[1,-1.274,0.9008]
 
 def initialize():
     for i in range(I):
@@ -47,7 +51,7 @@ def initialize():
     
     return Desired
 
-def initialize2():
+def initialize2(num,den):
     #desired output with IIR filter
     for i in range(I):
         Input[i]= random.random()
@@ -65,7 +69,7 @@ def initialize3():
     	
 def main():
     
-    Desired=initialize2()
+    Desired=initialize2(num,den)
     #Desired=initialize()
     
     T=0

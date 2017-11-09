@@ -44,7 +44,8 @@ print("#"*55)
 
 #generate Bode
 omega=np.linspace(0.1,4000*2*np.pi,6000,endpoint=True)
-mag, phase, omega = ct.bode(sys1,omega,dB=False,Plot=False)
+mag1, phase1, omega = ct.bode(sys1,omega,dB=False,Plot=False)
+mag1d, phase1d, omega = ct.bode(sys1_d,omega,dB=False,Plot=False)
 freq=omega/(2*np.pi)
 
 #System2 Variables
@@ -54,41 +55,39 @@ r3=1000
 r4=1080
 c1=0.1e-6
 
-#middle Variables
-parallel=r1/2
-a=-parallel/r1+1/r3-1/r1-1/r4
-b=1/r3+1/r1
-c=parallel/(r2*r4)+parallel*b/r2+1/r4
-
-#implementacion Arlin
-num2= np.array([1,-741,112e6])
-den2= np.array([1,19.3e3,92.6e6])
-#num2=[r4*r3*c1**2,r3*c1,-r4+1]
-#den2=[r3*c1**2,(r3*c1+c1),1]
+#System2 tf
+num2=[r4*r3*c1**2,(r3*c1-r4*c1),1]
+den2=[r4*r3*c1**2,(r3*c1+r4*c1),1]
 sys2 = ct.tf(num2, den2)
+sys2_d=ct.sample_system(sys2, 1/FS, method='tustin')
 
 
 #generate Bode
 omega=np.linspace(0.1,4000*2*np.pi,6000,endpoint=True)
 mag2, phase2, omega = ct.bode(sys2,omega,dB=False,Plot=False)
+mag2d, phase2d, omega = ct.bode(sys2_d,omega,dB=False,Plot=False)
+
 freq=omega/(2*np.pi)
 
 
 #print tf
-print("\n")
+#print tf
 print("#"*55)
 print("#"*10+" System 2")
 print("#"*55)
 print(sys2)
-#print(sys1_d)
+print(sys2_d)
 print("#"*55)
 print("#"*55)
 
 
 #Plot transfer functions frequency response
 fig,ax=plt.subplots(2)
-mp.myPlotter(ax[0],freq,abs(mag))
+mp.myPlotter(ax[0],freq,abs(mag1))
+mp.myPlotter(ax[0],freq,abs(mag1d),param_dict={'color':'red'})
+
 mp.myPlotter(ax[1],freq,abs(mag2))
+mp.myPlotter(ax[1],freq,abs(mag2d),param_dict={'color':'red'})
 
 
 setGraphLabels(ax[0],"System 1")
